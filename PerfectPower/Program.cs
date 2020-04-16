@@ -15,7 +15,7 @@ namespace PerfectPower
 
 			var sqrtResult = Math.Sqrt(num);
 
-			if (sqrtResult % 1 != 0)
+			if (sqrtResult % 1 != 0 && num < 0)
 				Console.WriteLine("null");
 			else
 			{
@@ -29,24 +29,28 @@ namespace PerfectPower
 
 		static int[] PerfectPower(int n)
 		{
-			for (double i = 2; i <= Math.Sqrt(n); i++)
+			if (n > 0)
 			{
-				double power = 2;
-				double number = Math.Pow(i, power);
-
-				while (number < n && number > 0)
+				for (double i = 2; i <= Math.Sqrt(n); i++)
 				{
-					power++;
-					number = Math.Pow(i, power);
-				}
+					double power = 2;
+					double number = Math.Pow(i, power);
 
-				if (number == n)
-				{
-					return new int[]
+					while (number < n && number > 0)
 					{
+						power++;
+						number = Math.Pow(i, power);
+					}
+
+					if (number == n)
+					{
+						return new int[]
+						{
 						(int)i, (int)power
-					};
+						};
+					}
 				}
+
 			}
 
 			return null;
