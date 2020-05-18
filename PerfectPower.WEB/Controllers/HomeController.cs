@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PerfectPower.BLL.Models.SearchResultModel;
 using PerfectPower.BLL.Services.LastElementsService;
 using PerfectPower.BLL.Services.PerfectPowerService;
@@ -59,6 +60,11 @@ namespace PerfectPower.WEB.Controllers
 		[HttpPost]
 		public IActionResult CheckNumber(int number)
 		{
+			if(number < 0)
+			{
+				return Content("Integer must be positive!");
+			}
+
 			var checkedNumber = _perfectPowerService.SearchingPerfectPower(number);
 
 			if (checkedNumber == null)
