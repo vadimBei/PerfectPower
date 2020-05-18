@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfectPower", "PerfectPower\PerfectPower.csproj", "{5F0C3BAD-CFF2-4925-B2E5-BA1FE9A7F64B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerfectPower.WEB", "PerfectPower.WEB\PerfectPower.WEB.csproj", "{60502410-97F5-4FF9-B72D-CBA46C80B3AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerfectPower.Core", "PerfectPower.Core\PerfectPower.Core.csproj", "{C965EF63-0797-4D8E-92FD-BB3A62A19115}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerfectPower.BLL", "PerfectPower.BLL\PerfectPower.BLL.csproj", "{94CFA53D-CE1F-4C28-92CF-C5707B8D9F33}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerfectPower.DAL", "PerfectPower.DAL\PerfectPower.DAL.csproj", "{71305FA0-6801-4696-832A-2732E8BB51B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfectPower.ConsoleApp", "PerfectPower.ConsoleApp\PerfectPower.ConsoleApp.csproj", "{2FCD179F-24AD-40F8-A143-79A880585E9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F0C3BAD-CFF2-4925-B2E5-BA1FE9A7F64B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F0C3BAD-CFF2-4925-B2E5-BA1FE9A7F64B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F0C3BAD-CFF2-4925-B2E5-BA1FE9A7F64B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F0C3BAD-CFF2-4925-B2E5-BA1FE9A7F64B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60502410-97F5-4FF9-B72D-CBA46C80B3AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60502410-97F5-4FF9-B72D-CBA46C80B3AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60502410-97F5-4FF9-B72D-CBA46C80B3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60502410-97F5-4FF9-B72D-CBA46C80B3AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C965EF63-0797-4D8E-92FD-BB3A62A19115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C965EF63-0797-4D8E-92FD-BB3A62A19115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C965EF63-0797-4D8E-92FD-BB3A62A19115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C965EF63-0797-4D8E-92FD-BB3A62A19115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94CFA53D-CE1F-4C28-92CF-C5707B8D9F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94CFA53D-CE1F-4C28-92CF-C5707B8D9F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94CFA53D-CE1F-4C28-92CF-C5707B8D9F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94CFA53D-CE1F-4C28-92CF-C5707B8D9F33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71305FA0-6801-4696-832A-2732E8BB51B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71305FA0-6801-4696-832A-2732E8BB51B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71305FA0-6801-4696-832A-2732E8BB51B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71305FA0-6801-4696-832A-2732E8BB51B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FCD179F-24AD-40F8-A143-79A880585E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FCD179F-24AD-40F8-A143-79A880585E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FCD179F-24AD-40F8-A143-79A880585E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FCD179F-24AD-40F8-A143-79A880585E9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

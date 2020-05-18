@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PerfectPower.WEB.ViewModels.SearchResult.SearchResultViewModel>
+
+<div class="container-fluid">
+	<div class="text-center">
+		<h5 class="mb-3 mt-3">Previous results</h5>
+
+		<table class="table table-sm table-bordered ">
+			<thead class="table-dark">
+				<tr>
+					<th scope="col">Inputed number</th>
+					<th scope="col">Number</th>
+					<th scope="col">Power</th>
+					<th scope="col">Type of power</th>
+				</tr>
+			</thead>
+			<tbody class="table-active">
+				@foreach (var temp in Model)
+				{
+					<tr>
+						<td>@temp.InputParameter</td>
+						<td>@temp.Number</td>
+						<td>@temp.Power</td>
+						@if (@temp.TypeOfPower == PerfectPower.DAL.Entities.TypeOfPower.PerfectCube)
+						{
+							<td>Perfect cube</td>
+						}
+						else if (@temp.TypeOfPower == PerfectPower.DAL.Entities.TypeOfPower.PerfectSquare)
+						{
+							<td>Perfect square</td>
+						}
+						else if (@temp.TypeOfPower != null)
+						{
+							<td>Perfect power</td>
+						}
+						else
+						{
+							<td>Is'n perfect power</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

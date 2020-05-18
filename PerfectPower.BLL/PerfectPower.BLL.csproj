@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PerfectPower.Core\PerfectPower.Core.csproj" />
+    <ProjectReference Include="..\PerfectPower.DAL\PerfectPower.DAL.csproj" />
+  </ItemGroup>
+
+</Project>
