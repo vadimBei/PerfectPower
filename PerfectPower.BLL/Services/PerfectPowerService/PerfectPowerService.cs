@@ -1,5 +1,4 @@
 ﻿using System;
-using AutoMapper;
 using PerfectPower.BLL.Models.SearchResultModel;
 using PerfectPower.BLL.Services.SearchResultService;
 using PerfectPower.BLL.Services.TypeOfPowerService;
@@ -10,16 +9,13 @@ namespace PerfectPower.BLL.Services.PerfectPowerService
 	{
 		private readonly ISearchResultService _searchResultService;
 		private readonly ITypeOfPowerService _typeOfPowerService;
-		private readonly IMapper _mapper;
 
 		public PerfectPowerService(
 			ISearchResultService searchResultService,
-			ITypeOfPowerService typeOfPowerService,
-			IMapper mapper)
+			ITypeOfPowerService typeOfPowerService)
 		{
 			_searchResultService = searchResultService;
 			_typeOfPowerService = typeOfPowerService;
-			_mapper = mapper;
 		}
 
 		public SearchResultModel SearchingPerfectPower(int n)
@@ -39,7 +35,7 @@ namespace PerfectPower.BLL.Services.PerfectPowerService
 
 					if (number == n)
 					{
-						var searchResult = _mapper.Map<SearchResultCreateModel>(new SearchResultCreateModel
+						var searchResultCreateModel = new SearchResultCreateModel()
 						{
 							InputParameter = n,
 							Number = (int)i,
@@ -47,9 +43,9 @@ namespace PerfectPower.BLL.Services.PerfectPowerService
 							DateCreation = DateTime.Now,
 							ModifiedDate = DateTime.Now,
 							TypeOfPower = _typeOfPowerService.GetTypeOfPower((int)power)
-						});
+						};
 
-						var searchResultId = _searchResultService.Create(searchResult);
+						var searchResultId = _searchResultService.Create(searchResultCreateModel);
 
 						var result = _searchResultService.Get(searchResultId);
 

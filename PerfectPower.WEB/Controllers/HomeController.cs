@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PerfectPower.BLL.Models.SearchResultModel;
 using PerfectPower.BLL.Services.LastElementsService;
 using PerfectPower.BLL.Services.PerfectPowerService;
 using PerfectPower.BLL.Services.SearchResultService;
+using PerfectPower.DAL.Entities;
 using PerfectPower.WEB.Models;
 using PerfectPower.WEB.ViewModels.SearchResult;
 
@@ -37,22 +37,9 @@ namespace PerfectPower.WEB.Controllers
 		{
 			var searchResults = _searchResultService.GetAll().ToList();
 
-			_lastElementsService.LastFiveElements(ref searchResults);
+			var fiveElements = _lastElementsService.LastFiveElements(searchResults);
 
-			List<SearchResultViewModel> resultsToView = new List<SearchResultViewModel>();
-
-			foreach (var tempElem in searchResults)
-			{
-				var temp = _mapper.Map<SearchResultViewModel>(new SearchResultViewModel
-				{
-					InputParameter = tempElem.InputParameter,
-					Number = tempElem.Number,
-					Power = tempElem.Power,
-					TypeOfPower = tempElem.TypeOfPower
-				});
-
-				resultsToView.Add(temp);
-			}
+			var resultsToView = _mapper.Map<List<SearchResultViewModel>>(fiveElements);
 
 			return View(resultsToView);
 		}
@@ -69,15 +56,17 @@ namespace PerfectPower.WEB.Controllers
 
 			if (checkedNumber == null)
 			{
-				var newSearchResult = _mapper.Map<SearchResultCreateModel>(new SearchResultCreateModel
+				var searchResultCreateModel = new SearchResultCreateModel()
 				{
 					InputParameter = number,
+					Number = null,
+					Power = null,
 					DateCreation = DateTime.Now,
 					ModifiedDate = DateTime.Now,
-					TypeOfPower = null
-				});
+					TypeOfPower = TypeOfPower.IsNotPerfectPower
+				};
 
-				_searchResultService.Create(newSearchResult);
+				_searchResultService.Create(searchResultCreateModel);
 			}
 
 			return RedirectToAction("Index", "Home");

@@ -14,7 +14,7 @@ namespace PerfectPower.ConsoleApp
 {
 	class Program
 	{
-		public static IServiceCollection ConfigureServices()
+		public static ServiceProvider ConfigureServicesProvider()
 		{
 			IServiceCollection services = new ServiceCollection();
 
@@ -27,17 +27,13 @@ namespace PerfectPower.ConsoleApp
 			services.AddScoped<IPerfectPowerService, PerfectPowerService>();
 			services.AddScoped<ICreatorOfSearchResultService, CreatorOfSearchResultService>();
 
-			return services;
+			return services.BuildServiceProvider();
 		}
 
 		static void Main(string[] args)
 		{
 
-			// Create service collection and configure our services
-			var services = ConfigureServices();
-
-			// Generate a provider
-			var serviceProvider = services.BuildServiceProvider();
+			var serviceProvider = ConfigureServicesProvider();
 
 			Console.WriteLine("Please wait...!!!");
 
@@ -45,7 +41,7 @@ namespace PerfectPower.ConsoleApp
 			var allElements = serviceProvider.GetService<ISearchResultService>().GetAll().ToList();
 
 			// Get last five SearchResult elements
-			var searchResults = serviceProvider.GetService<ILastElementsService>().LastFiveElements(ref allElements);
+			var searchResults = serviceProvider.GetService<ILastElementsService>().LastFiveElements(allElements);
 
 			Console.WriteLine();
 			Console.WriteLine("Previous results:");

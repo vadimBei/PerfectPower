@@ -37,13 +37,7 @@ namespace PerfectPower.ConsoleApp.Service.OutputValueService
 
 		public void OutputElementOfSearchResultToConsole(SearchResultModel searchResultModel)
 		{
-			var elemToView = _mapper.Map<SearchResultViewModel>(new SearchResultViewModel
-			{
-				InputParameter = searchResultModel.InputParameter,
-				Number = searchResultModel.Number,
-				Power = searchResultModel.Power,
-				TypeOfPower = searchResultModel.TypeOfPower
-			});
+			var elemToView = _mapper.Map<SearchResultViewModel>(searchResultModel);
 
 			PrintToConsole(elemToView);
 		}
@@ -52,30 +46,18 @@ namespace PerfectPower.ConsoleApp.Service.OutputValueService
 		{
 			var searchResultModel = _searchResultService.Get(id);
 
-			var elemToView = _mapper.Map<SearchResultViewModel>(new SearchResultViewModel
-			{
-				InputParameter = searchResultModel.InputParameter,
-				Number = searchResultModel.Number,
-				Power = searchResultModel.Power,
-				TypeOfPower = searchResultModel.TypeOfPower
-			});
+			var elemToView = _mapper.Map<SearchResultViewModel>(searchResultModel);
 
 			PrintToConsole(elemToView);
 		}
 
 		public void OutputListOfSearchResultToConsole(List<SearchResultModel> searchResults)
 		{
-			foreach (var temp in searchResults)
-			{
-				var elemToView = _mapper.Map<SearchResultViewModel>(new SearchResultViewModel
-				{
-					InputParameter = temp.InputParameter,
-					Number = temp.Number,
-					Power = temp.Power,
-					TypeOfPower = temp.TypeOfPower
-				});
+			var elemToView = _mapper.Map<List<SearchResultViewModel>>(searchResults);
 
-				PrintToConsole(elemToView);
+			foreach (var temp in elemToView)
+			{
+				PrintToConsole(temp);
 			}
 		}
 	}

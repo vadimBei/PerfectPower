@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerfectPower.BLL", "Perfect
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerfectPower.DAL", "PerfectPower.DAL\PerfectPower.DAL.csproj", "{71305FA0-6801-4696-832A-2732E8BB51B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfectPower.ConsoleApp", "PerfectPower.ConsoleApp\PerfectPower.ConsoleApp.csproj", "{2FCD179F-24AD-40F8-A143-79A880585E9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerfectPower.ConsoleApp", "PerfectPower.ConsoleApp\PerfectPower.ConsoleApp.csproj", "{2FCD179F-24AD-40F8-A143-79A880585E9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfectPower.WPF", "PerfectPower.WPF\PerfectPower.WPF.csproj", "{0E8D7022-6151-421B-B27A-DF5EDC65AD92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2FCD179F-24AD-40F8-A143-79A880585E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FCD179F-24AD-40F8-A143-79A880585E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FCD179F-24AD-40F8-A143-79A880585E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E8D7022-6151-421B-B27A-DF5EDC65AD92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E8D7022-6151-421B-B27A-DF5EDC65AD92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E8D7022-6151-421B-B27A-DF5EDC65AD92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E8D7022-6151-421B-B27A-DF5EDC65AD92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

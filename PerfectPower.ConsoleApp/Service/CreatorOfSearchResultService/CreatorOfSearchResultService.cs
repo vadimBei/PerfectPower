@@ -1,21 +1,18 @@
 ﻿using System;
-using AutoMapper;
 using PerfectPower.BLL.Models.SearchResultModel;
 using PerfectPower.BLL.Services.SearchResultService;
+using PerfectPower.DAL.Entities;
 
 namespace PerfectPower.ConsoleApp.Service.CreatorOfSearchResultService
 {
 	public class CreatorOfSearchResultService : ICreatorOfSearchResultService
 	{
 		private readonly ISearchResultService _searchResultService;
-		private readonly IMapper _mapper;
 
 		public CreatorOfSearchResultService(
-			ISearchResultService searchResultService,
-			IMapper mapper)
+			ISearchResultService searchResultService)
 		{
 			_searchResultService = searchResultService;
-			_mapper = mapper;
 		}
 
 		public Guid CreateSearchResultElement(int number)
@@ -24,16 +21,17 @@ namespace PerfectPower.ConsoleApp.Service.CreatorOfSearchResultService
 
 			if (number > 0)
 			{
-				var newSearchResult = _mapper.Map<SearchResultCreateModel>(new SearchResultCreateModel
+				var searchResultCreateModel = new SearchResultCreateModel()
 				{
 					InputParameter = number,
 					Number = null,
 					Power = null,
 					DateCreation = DateTime.Now,
 					ModifiedDate = DateTime.Now,
-					TypeOfPower = null
-				});
-				searchResultId = _searchResultService.Create(newSearchResult);
+					TypeOfPower = TypeOfPower.IsNotPerfectPower
+				};
+
+				searchResultId = _searchResultService.Create(searchResultCreateModel);
 			}
 
 			return searchResultId;

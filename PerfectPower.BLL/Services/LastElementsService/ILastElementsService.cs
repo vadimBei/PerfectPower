@@ -6,6 +6,6 @@ namespace PerfectPower.BLL.Services.LastElementsService
 	public interface ILastElementsService
 	{
 		// If table SearchResults has more then five elements, this method returns the last five elements
-		List<SearchResultModel> LastFiveElements(ref List<SearchResultModel> searchResults);
+		List<SearchResultModel> LastFiveElements(List<SearchResultModel> searchResults);
 	}
 }

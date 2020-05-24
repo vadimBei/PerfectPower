@@ -6,7 +6,8 @@ namespace PerfectPower.DAL.Entities
 	{
 		PerfectPower,
 		PerfectSquare,
-		PerfectCube
+		PerfectCube,
+		IsNotPerfectPower
 	}
 
 	public class SearchResult : BaseEntity

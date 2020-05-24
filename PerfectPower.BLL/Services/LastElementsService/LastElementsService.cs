@@ -6,7 +6,7 @@ namespace PerfectPower.BLL.Services.LastElementsService
 {
 	public class LastElementsService : ILastElementsService
 	{
-		public List<SearchResultModel> LastFiveElements(ref List<SearchResultModel> searchResultModels)
+		public List<SearchResultModel> LastFiveElements(List<SearchResultModel> searchResultModels)
 		{
 			searchResultModels = searchResultModels.OrderByDescending(r => r.DateCreation).ToList();
 

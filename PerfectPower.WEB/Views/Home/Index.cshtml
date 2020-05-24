@@ -28,11 +28,11 @@
 						{
 							<td>Perfect square</td>
 						}
-						else if (@temp.TypeOfPower != null)
+						else if (@temp.TypeOfPower == PerfectPower.DAL.Entities.TypeOfPower.PerfectPower)
 						{
 							<td>Perfect power</td>
 						}
-						else
+						else if(@temp.TypeOfPower == PerfectPower.DAL.Entities.TypeOfPower.IsNotPerfectPower)
 						{
 							<td>Is'n perfect power</td>
 						}
