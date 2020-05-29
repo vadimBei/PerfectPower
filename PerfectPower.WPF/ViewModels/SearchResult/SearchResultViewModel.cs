@@ -1,7 +1,7 @@
 ﻿using System;
 using PerfectPower.DAL.Entities;
 
-namespace PerfectPower.WEB.ViewModels.SearchResult
+namespace PerfectPower.WPF.ViewModels.SearchResult
 {
 	public class SearchResultViewModel
 	{
@@ -14,5 +14,6 @@ namespace PerfectPower.WEB.ViewModels.SearchResult
 		public int? Power { get; set; }
 
 		public TypeOfPower TypeOfPower { get; set; }
+
 	}
 }

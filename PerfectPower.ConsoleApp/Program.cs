@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PerfectPower.BLL.Services.CreatorOfSearchResultCreateModelService;
 using PerfectPower.BLL.Services.LastElementsService;
 using PerfectPower.BLL.Services.PerfectPowerService;
 using PerfectPower.BLL.Services.SearchResultService;
 using PerfectPower.BLL.Services.TypeOfPowerService;
-using PerfectPower.ConsoleApp.Service.CreatorOfSearchResultService;
 using PerfectPower.ConsoleApp.Service.OutputValueService;
+using PerfectPower.ConsoleApp.ViewModels;
 using PerfectPower.DAL.Common;
 
 namespace PerfectPower.ConsoleApp
@@ -18,14 +23,25 @@ namespace PerfectPower.ConsoleApp
 		{
 			IServiceCollection services = new ServiceCollection();
 
+			var builder = new ConfigurationBuilder();
+			builder.SetBasePath(Directory.GetCurrentDirectory());
+
+			// Get configuration form file 
+			builder.AddJsonFile("appsettings.json");
+
+			// Create configuration
+			var config = builder.Build();
+
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-			services.AddDbContext<ApplicationDbContext>();
+			services.AddDbContext<ApplicationDbContext>(optionsAction=> 
+			optionsAction.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
 			services.AddScoped<ISearchResultService, SearchResultService>();
 			services.AddScoped<ILastElementsService, LastElementsService>();
 			services.AddScoped<IOutputValueService, OutputValueService>();
 			services.AddScoped<ITypeOfPowerService, TypeOfPowerService>();
 			services.AddScoped<IPerfectPowerService, PerfectPowerService>();
-			services.AddScoped<ICreatorOfSearchResultService, CreatorOfSearchResultService>();
+			services.AddScoped<ICreatorOfSearchResultCreateModelService, CreatorOfSearchResultCreateModelService>();
 
 			return services.BuildServiceProvider();
 		}
@@ -43,11 +59,15 @@ namespace PerfectPower.ConsoleApp
 			// Get last five SearchResult elements
 			var searchResults = serviceProvider.GetService<ILastElementsService>().LastFiveElements(allElements);
 
+			var searchResultViewModel = serviceProvider.GetService<IMapper>()
+				.Map<List<SearchResultViewModel>>(searchResults);
+
 			Console.WriteLine();
 			Console.WriteLine("Previous results:");
 
 			// Output elements to console
-			serviceProvider.GetService<IOutputValueService>().OutputListOfSearchResultToConsole(searchResults);
+			serviceProvider.GetService<IOutputValueService>()
+				.OutputListOfSearchResultToConsole(searchResultViewModel);
 
 			Console.WriteLine();
 			Console.WriteLine("Please enter the a positive integer and press Enter: ");
@@ -56,24 +76,36 @@ namespace PerfectPower.ConsoleApp
 
 			if (number < 0)
 			{
-				Console.WriteLine("Input element must be positive!!!!");
-			}
-
-			// Check if number is perfect power
-			var perfectPower = serviceProvider.GetService<IPerfectPowerService>().SearchingPerfectPower(number);
-
-			if (perfectPower == null)
-			{
-				var newSearchResultId = serviceProvider.GetService<ICreatorOfSearchResultService>()
-					.CreateSearchResultElement(number);
-
 				Console.WriteLine();
-				serviceProvider.GetService<IOutputValueService>().OutputElementOfSearchResultToConsoleById(newSearchResultId);
+				Console.WriteLine("Input element must be positive!!!!");
 			}
 			else
 			{
-				Console.WriteLine();
-				serviceProvider.GetService<IOutputValueService>().OutputElementOfSearchResultToConsole(perfectPower);
+				// Check if number is perfect power
+				var perfectPower = serviceProvider.GetService<IPerfectPowerService>().SearchingPerfectPower(number);
+
+				if (perfectPower == null)
+				{
+					var newSearchResultModel = serviceProvider.GetService<ICreatorOfSearchResultCreateModelService>()
+						.CreateSearchResultModel(number);
+
+					var newSearchResultViewModel = serviceProvider.GetService<IMapper>()
+						.Map<SearchResultViewModel>(newSearchResultModel);
+
+					Console.WriteLine();
+					serviceProvider.GetService<IOutputValueService>().OutputElementOfSearchResultToConsole(newSearchResultViewModel);
+				}
+				else if (perfectPower is int[])
+				{
+					var newSearchResultModel = serviceProvider.GetService<ICreatorOfSearchResultCreateModelService>()
+						.CreateSearchResultModel(perfectPower);
+
+					var newSearchResultViewModel = serviceProvider.GetService<IMapper>()
+						.Map<SearchResultViewModel>(newSearchResultModel);
+
+					Console.WriteLine();
+					serviceProvider.GetService<IOutputValueService>().OutputElementOfSearchResultToConsole(newSearchResultViewModel);
+				}
 			}
 
 			Console.ReadKey();

@@ -6,17 +6,12 @@ namespace PerfectPower.DAL.Common
 {
 	public class ApplicationDbContext : DbContext
 	{
-		public ApplicationDbContext()
+		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
 		{
 			Database.EnsureCreated();
 		}
 
 		public DbSet<SearchResult> SearchResults { get; set; }
-
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.UseSqlServer("Server=DESKTOP-R4RSQG4;Database=PerfectPowerDb;Trusted_Connection=True;MultipleActiveResultSets=true");
-		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

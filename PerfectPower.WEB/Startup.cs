@@ -2,9 +2,11 @@ using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PerfectPower.BLL.Services.CreatorOfSearchResultCreateModelService;
 using PerfectPower.BLL.Services.LastElementsService;
 using PerfectPower.BLL.Services.PerfectPowerService;
 using PerfectPower.BLL.Services.SearchResultService;
@@ -25,12 +27,14 @@ namespace PerfectPower.WEB
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<ApplicationDbContext>();
+			services.AddDbContext<ApplicationDbContext>(options =>
+			options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 			services.AddScoped<ISearchResultService, SearchResultService>();
 			services.AddScoped<ITypeOfPowerService, TypeOfPowerService>();
 			services.AddScoped<IPerfectPowerService, PerfectPowerService>();
 			services.AddScoped<ILastElementsService, LastElementsService>();
+			services.AddScoped<ICreatorOfSearchResultCreateModelService, CreatorOfSearchResultCreateModelService>();
 
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

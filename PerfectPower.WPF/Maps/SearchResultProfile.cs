@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using PerfectPower.BLL.Models.SearchResultModel;
-using PerfectPower.ConsoleApp.ViewModels;
+using PerfectPower.WPF.ViewModels.SearchResult;
 
-namespace PerfectPower.ConsoleApp.Maps
+namespace PerfectPower.WPF.Maps
 {
 	public class SearchResultProfile : Profile
 	{

@@ -18,6 +18,6 @@ namespace PerfectPower.DAL.Entities
 
 		public int? Power { get; set; }
 
-		public TypeOfPower? TypeOfPower { get; set; }
+		public TypeOfPower TypeOfPower { get; set; }
 	}
 }

@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
   </ItemGroup>
 
@@ -14,6 +15,12 @@
     <ProjectReference Include="..\PerfectPower.BLL\PerfectPower.BLL.csproj" />
     <ProjectReference Include="..\PerfectPower.DAL\PerfectPower.DAL.csproj" />
     <ProjectReference Include="..\PerfectPower.WEB\PerfectPower.WEB.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using PerfectPower.BLL.Models.SearchResultModel;
+using PerfectPower.BLL.Services.CreatorOfSearchResultCreateModelService;
 using PerfectPower.BLL.Services.LastElementsService;
 using PerfectPower.BLL.Services.PerfectPowerService;
 using PerfectPower.BLL.Services.SearchResultService;
-using PerfectPower.DAL.Entities;
 using PerfectPower.WEB.Models;
 using PerfectPower.WEB.ViewModels.SearchResult;
 
@@ -16,17 +14,20 @@ namespace PerfectPower.WEB.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly IMapper _mapper;
+		private readonly ICreatorOfSearchResultCreateModelService _creatorOfSearchResult;
 		private readonly ISearchResultService _searchResultService;
 		private readonly IPerfectPowerService _perfectPowerService;
 		private readonly ILastElementsService _lastElementsService;
+		private readonly IMapper _mapper;
 
 		public HomeController(
+			ICreatorOfSearchResultCreateModelService creatorOfSearchResult,
 			ISearchResultService searchResultService,
 			IPerfectPowerService perfectPowerService,
 			ILastElementsService lastElementsService,
 			IMapper mapper)
 		{
+			_creatorOfSearchResult = creatorOfSearchResult;
 			_searchResultService = searchResultService;
 			_perfectPowerService = perfectPowerService;
 			_lastElementsService = lastElementsService;
@@ -47,7 +48,7 @@ namespace PerfectPower.WEB.Controllers
 		[HttpPost]
 		public IActionResult CheckNumber(int number)
 		{
-			if(number < 0)
+			if (number < 0)
 			{
 				return Content("Integer must be positive!");
 			}
@@ -56,17 +57,11 @@ namespace PerfectPower.WEB.Controllers
 
 			if (checkedNumber == null)
 			{
-				var searchResultCreateModel = new SearchResultCreateModel()
-				{
-					InputParameter = number,
-					Number = null,
-					Power = null,
-					DateCreation = DateTime.Now,
-					ModifiedDate = DateTime.Now,
-					TypeOfPower = TypeOfPower.IsNotPerfectPower
-				};
-
-				_searchResultService.Create(searchResultCreateModel);
+				_creatorOfSearchResult.CreateSearchResultModel(number);
+			}
+			else if (checkedNumber is int[])
+			{
+				_creatorOfSearchResult.CreateSearchResultModel(checkedNumber);
 			}
 
 			return RedirectToAction("Index", "Home");

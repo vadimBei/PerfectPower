@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoMapper;
 using PerfectPower.BLL.Models.SearchResultModel;
-using PerfectPower.BLL.Services.SearchResultService;
-using PerfectPower.WEB.ViewModels.SearchResult;
+using PerfectPower.ConsoleApp.ViewModels;
 
 namespace PerfectPower.ConsoleApp.Service.OutputValueService
 {
 	public class OutputValueService : IOutputValueService
 	{
-		private readonly ISearchResultService _searchResultService;
-		private readonly IMapper _mapper;
-
-		public OutputValueService(
-			ISearchResultService searchResultService,
-			IMapper mapper)
-		{
-			_searchResultService = searchResultService;
-			_mapper = mapper;
-		}
-
 		public static void PrintToConsole(SearchResultViewModel viewModel)
 		{
 			if (viewModel.Number == null || viewModel.Power == null)
@@ -35,27 +22,14 @@ namespace PerfectPower.ConsoleApp.Service.OutputValueService
 					$" {viewModel.Number}, and power {viewModel.Power}");
 		}
 
-		public void OutputElementOfSearchResultToConsole(SearchResultModel searchResultModel)
+		public void OutputElementOfSearchResultToConsole(SearchResultViewModel searchResultModel)
 		{
-			var elemToView = _mapper.Map<SearchResultViewModel>(searchResultModel);
-
-			PrintToConsole(elemToView);
+			PrintToConsole(searchResultModel);
 		}
 
-		public void OutputElementOfSearchResultToConsoleById(Guid id)
+		public void OutputListOfSearchResultToConsole(List<SearchResultViewModel> searchResults)
 		{
-			var searchResultModel = _searchResultService.Get(id);
-
-			var elemToView = _mapper.Map<SearchResultViewModel>(searchResultModel);
-
-			PrintToConsole(elemToView);
-		}
-
-		public void OutputListOfSearchResultToConsole(List<SearchResultModel> searchResults)
-		{
-			var elemToView = _mapper.Map<List<SearchResultViewModel>>(searchResults);
-
-			foreach (var temp in elemToView)
+			foreach (var temp in searchResults)
 			{
 				PrintToConsole(temp);
 			}

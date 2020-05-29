@@ -1,7 +1,7 @@
 ﻿using System;
 using PerfectPower.DAL.Entities;
 
-namespace PerfectPower.WEB.ViewModels.SearchResult
+namespace PerfectPower.ConsoleApp.ViewModels
 {
 	public class SearchResultViewModel
 	{
